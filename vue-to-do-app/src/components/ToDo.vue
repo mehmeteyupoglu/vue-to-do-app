@@ -7,9 +7,9 @@
     
     <div v-if="todoList.length  > 0" >
       <ul class="todo" >
-        <li v-for="item in todoList" :key="item" class="items">
+        <li v-for="item in todoList" :key="item" class="items" @click="toggle" :class="{ active: isActive }">
           {{ item }}
-          <button @click="deleteTodo" > X </button>
+          <button @click="deleteTodo"> X </button>
         </li>
       </ul>
     </div>
@@ -26,8 +26,8 @@ export default {
   data(){
     return {
       todos :  "",
-      todoList: [] 
-
+      todoList: [], 
+      isActive: true 
     }
   }, 
   methods : {
@@ -38,8 +38,13 @@ export default {
 
     deleteTodo() {
       this.todoList.filter(element => element !== this.todos)
+    },
+
+    toggle() {
+      this.isActive = !this.isActive
     }
-  }
+
+  }, 
 }
 </script>
 
@@ -67,8 +72,8 @@ a {
   display: flex; 
   flex-direction: column;
   align-items: flex-start;
-  width: 250px; 
-  margin-left: 31%;   
+  width: 300px; 
+  margin-left: 40%;   
   background: whitesmoke; 
   box-shadow: 2px 2px 10px gray; 
    
@@ -78,7 +83,11 @@ a {
   display: flex;   
   align-items: center; 
   margin-bottom: 10px;
-  padding: 15px 0;  
+  padding: 15px 0;   
+}
+
+.active {
+  text-decoration: line-through; 
 }
 
 input {
